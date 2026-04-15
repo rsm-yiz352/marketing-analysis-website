@@ -1,0 +1,17 @@
+---
+title: "Yi(Ryan) Zhao"
+image: "files/profile.jpg"
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      href: mailto:zhao.ryan03@gmail.com
+    - icon: linkedin
+      href: https://www.linkedin.com/in/yi-zhao-33074a357/
+---
+
+Hi, I’m Ryan.
+
+I am a UC San Diego MSBA student interested in marketing analytics, business strategy, and data-driven decision making.
+
+Welcome to my personal website. I will use this site to share my projects, coursework, and professional development.

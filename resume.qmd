@@ -1,0 +1,5 @@
+---
+title: "Resume"
+---
+
+{{< pdf files/CV1.pdf width=100% height=800 >}}
