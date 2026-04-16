@@ -14,13 +14,6 @@
     "text": "This is my first project page.\nI will use this space to share my marketing analytics assignments, project summaries, and business insights."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "More",
-    "section": "",
-    "text": "More content coming soon."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Yi(Ryan) Zhao",
@@ -28,10 +21,94 @@
     "text": "Hi, I’m Ryan.\nI am a UC San Diego MSBA student interested in marketing analytics, business strategy, and data-driven decision making.\nWelcome to my personal website. I will use this site to share my projects, coursework, and professional development."
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "More",
+    "section": "",
+    "text": "More content coming soon."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html",
+    "href": "projects/AB-testing/index.html",
+    "title": "A/B Testing a Call to Action",
+    "section": "",
+    "text": "In this post, I study an A/B test for a website call to action (CTA). The business goal is to determine which wording leads to a higher newsletter sign-up rate. Although this is a practical marketing problem, it is also a useful setting for learning key ideas from classical frequentist statistics.\nThe basic idea of the experiment is simple. Website visitors are randomly assigned to one of two CTA versions, A or B, and we observe whether each visitor signs up for the newsletter. By comparing the observed sign-up rates across the two groups, we can estimate the effect of CTA wording on conversion.\nThis example also connects directly to the frequentist view of probability from class. In that framework, probability is understood as a long-run relative frequency over repeated trials. Here, the sign-up rate for each CTA can be interpreted as the long-run proportion of visitors who would sign up if we repeatedly showed that version to many similar users."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#introduction",
+    "href": "projects/AB-testing/index.html#introduction",
+    "title": "A/B Testing a Call to Action",
+    "section": "",
+    "text": "In this post, I study an A/B test for a website call to action (CTA). The business goal is to determine which wording leads to a higher newsletter sign-up rate. Although this is a practical marketing problem, it is also a useful setting for learning key ideas from classical frequentist statistics.\nThe basic idea of the experiment is simple. Website visitors are randomly assigned to one of two CTA versions, A or B, and we observe whether each visitor signs up for the newsletter. By comparing the observed sign-up rates across the two groups, we can estimate the effect of CTA wording on conversion.\nThis example also connects directly to the frequentist view of probability from class. In that framework, probability is understood as a long-run relative frequency over repeated trials. Here, the sign-up rate for each CTA can be interpreted as the long-run proportion of visitors who would sign up if we repeatedly showed that version to many similar users."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#the-ab-test-as-a-statistical-problem",
+    "href": "projects/AB-testing/index.html#the-ab-test-as-a-statistical-problem",
+    "title": "A/B Testing a Call to Action",
+    "section": "The A/B Test as a Statistical Problem",
+    "text": "The A/B Test as a Statistical Problem\nEach visitor produces a binary outcome: either they sign up for the newsletter or they do not. Because of this, each observation can be modeled as a Bernoulli random variable that takes value 1 for a sign-up and 0 otherwise.\nLet \\(\\pi_A\\) denote the true probability that a visitor signs up after seeing version A, and let \\(\\pi_B\\) denote the corresponding probability under version B. The main quantity of interest is the treatment effect:\n\\[\n\\theta = \\pi_A - \\pi_B\n\\]\nThis parameter measures the true difference in sign-up rates between the two CTA versions. If \\(\\theta &gt; 0\\), then version A performs better on average. If \\(\\theta &lt; 0\\), then version B performs better.\nA natural estimator for this parameter is the difference in sample means:\n\\[\n\\hat{\\theta} = \\bar{X}_A - \\bar{X}_B\n\\]\nSince the outcome is coded as 1 for sign-up and 0 for no sign-up, the sample mean in each group is simply the sample sign-up rate. Therefore, the difference in sample means is the same as the difference in observed conversion rates."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#simulating-data",
+    "href": "projects/AB-testing/index.html#simulating-data",
+    "title": "A/B Testing a Call to Action",
+    "section": "Simulating Data",
+    "text": "Simulating Data\nTo make the statistical ideas concrete, I simulate data under a known data-generating process. I assume that the true sign-up probability is 0.22 for CTA version A and 0.18 for CTA version B. Therefore, the true treatment effect is:\n\\[\n\\theta = 0.22 - 0.18 = 0.04\n\\]\nThis means that version A is assumed to outperform version B by 4 percentage points in the population. I then simulate 1000 visitors in each group, where each visitor either signs up or does not sign up.\nThis setup is useful because in real applications the true parameter is unknown, but in a simulation we know the truth in advance. That allows us to study how well estimators behave, how much they vary from sample to sample, and how ideas such as the law of large numbers, the central limit theorem, and hypothesis testing work in practice.\n\nimport numpy as np\nimport pandas as pd\n\nnp.random.seed(495)\n\npi_A = 0.22\npi_B = 0.18\nn_A = 1000\nn_B = 1000\n\nA = np.random.binomial(1, pi_A, n_A)\nB = np.random.binomial(1, pi_B, n_B)\n\nhat_pi_A = A.mean()\nhat_pi_B = B.mean()\nhat_theta = hat_pi_A - hat_pi_B\n\nsummary_df = pd.DataFrame({\n    \"Group\": [\"A\", \"B\"],\n    \"Sample Size\": [n_A, n_B],\n    \"Estimated Sign-up Rate\": [hat_pi_A, hat_pi_B]\n})\n\nsummary_df[\"Estimated Sign-up Rate\"] = summary_df[\"Estimated Sign-up Rate\"].round(4)\n\nsummary_df\n\n\n\n\n\n\n\n\nGroup\nSample Size\nEstimated Sign-up Rate\n\n\n\n\n0\nA\n1000\n0.202\n\n\n1\nB\n1000\n0.176\n\n\n\n\n\n\n\n\nprint(f\"Estimated treatment effect (hat_theta): {hat_theta:.4f}\")\n\nEstimated treatment effect (hat_theta): 0.0260\n\n\nThe simulated sample produces an estimated sign-up rate for each CTA version and an estimated treatment effect \\(\\hat{\\theta}\\). Because the data are generated randomly, these sample estimates will not be exactly equal to the true values of 0.22, 0.18, and 0.04 in every run. This sampling variation is fundamental to frequentist inference and motivates the need for ideas such as standard errors, confidence intervals, and hypothesis testing."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#the-law-of-large-numbers",
+    "href": "projects/AB-testing/index.html#the-law-of-large-numbers",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Law of Large Numbers",
+    "text": "The Law of Large Numbers\nThe Law of Large Numbers (LLN) says that as the sample size grows, the sample mean converges to the population mean. In this A/B testing context, that idea applies directly to the estimator\n\\[\n\\hat{\\theta} = \\bar{X}_A - \\bar{X}_B\n\\]\nAs the number of observations increases, the difference in sample means should get closer to the true treatment effect \\(\\theta = \\pi_A - \\pi_B\\). This is what gives us confidence that large samples are informative: although any one sample may be noisy, the estimator becomes more stable as more data accumulate.\n\nimport matplotlib.pyplot as plt\n\ndiff = A - B\nrunning_mean = np.cumsum(diff) / np.arange(1, len(diff) + 1)\n\nplt.figure(figsize=(10, 6))\nplt.plot(np.arange(1, len(diff) + 1), running_mean, label=\"Running mean of A - B\")\nplt.axhline(y=0.04, linestyle=\"--\", label=\"True treatment effect (0.04)\")\nplt.xlabel(\"Sample Size\")\nplt.ylabel(\"Cumulative Average\")\nplt.title(\"Law of Large Numbers for the Difference in Means\")\nplt.legend()\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nThe figure shows that the cumulative average of the difference vector is quite unstable when the sample size is small, but it becomes more stable as the sample size increases. Over time, the running mean moves toward the true treatment effect of 0.04. This is a visual demonstration of the Law of Large Numbers: although early observations can produce substantial noise, larger samples tend to average that noise out."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#bootstrap-standard-errors",
+    "href": "projects/AB-testing/index.html#bootstrap-standard-errors",
+    "title": "A/B Testing a Call to Action",
+    "section": "Bootstrap Standard Errors",
+    "text": "Bootstrap Standard Errors\nNow that I have a point estimate for the treatment effect, the next natural question is how precise that estimate is. A point estimate alone is not enough, because repeated samples would produce different values of \\(\\hat{\\theta}\\). To quantify this uncertainty, I estimate the standard error of \\(\\hat{\\theta}\\).\nOne flexible way to do this is the bootstrap. The bootstrap repeatedly resamples from the observed data, with replacement, and recalculates the estimator each time. The variation across these bootstrap estimates approximates the sampling variation of the original estimator.\nHere, I repeatedly resample the A group and the B group separately, compute a bootstrap version of the treatment effect each time, and then use the standard deviation of those bootstrap estimates as the bootstrap standard error.\n\nn_boot = 1000\nboot_thetas = []\n\nfor _ in range(n_boot):\n    A_boot = np.random.choice(A, size=n_A, replace=True)\n    B_boot = np.random.choice(B, size=n_B, replace=True)\n\n    hat_theta_boot = A_boot.mean() - B_boot.mean()\n    boot_thetas.append(hat_theta_boot)\n\nboot_thetas = np.array(boot_thetas)\nboot_se = boot_thetas.std(ddof=1)\n\nprint(f\"Bootstrap standard error: {boot_se:.4f}\")\n\nBootstrap standard error: 0.0175\n\n\n\n\nAnalytical standard error: 0.0175\n\n\n\n\n95% Confidence Interval: [-0.0083, 0.0603]\n\n\nThe bootstrap standard error and the analytical standard error are essentially identical in this simulation, both equal to about 0.0175. This suggests that the bootstrap is capturing the sampling uncertainty of the estimator very well.\nUsing the bootstrap standard error, I construct a 95% confidence interval for the treatment effect. This interval describes a range of plausible values for the true difference in sign-up rates. If the interval contains 0, then the observed difference may be explained by sampling variation alone. If the interval excludes 0, then the data provide stronger evidence that the two CTA versions perform differently."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#the-central-limit-theorem",
+    "href": "projects/AB-testing/index.html#the-central-limit-theorem",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Central Limit Theorem",
+    "text": "The Central Limit Theorem\nThe Central Limit Theorem (CLT) says that, under regularity conditions, the sampling distribution of a sample mean becomes approximately normal as the sample size grows. In this A/B testing setting, the estimator \\(\\hat{\\theta} = \\bar{X}_A - \\bar{X}_B\\) is based on sample means, so the CLT implies that its sampling distribution should also become increasingly normal as the number of observations increases.\nThis matters because much of frequentist inference relies on approximate normality. Confidence intervals and hypothesis tests are much easier to construct when the estimator has a sampling distribution that is close to bell-shaped and symmetric.\n\n\n\n\n\n\n\n\n\nThe histograms show the sampling distribution of \\(\\hat{\\theta}\\) for different sample sizes. When the sample size is small, the distribution is noisier and less smooth. As the sample size increases, the distribution becomes more concentrated and more symmetric around the true treatment effect of 0.04.\nThis is exactly what the Central Limit Theorem predicts. Even though the underlying data are Bernoulli rather than normal, the distribution of the estimator becomes increasingly close to a normal distribution as the sample size grows."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#hypothesis-testing",
+    "href": "projects/AB-testing/index.html#hypothesis-testing",
+    "title": "A/B Testing a Call to Action",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nTo formally test whether the two CTA versions differ, I consider the null hypothesis that the true treatment effect is zero:\n\\[\nH_0: \\theta = 0\n\\]\nagainst the two-sided alternative\n\\[\nH_1: \\theta \\neq 0\n\\]\nUnder the null hypothesis, the two versions have the same true sign-up rate, so any observed difference in the sample is due only to random sampling variation. Under the alternative hypothesis, the true sign-up rates differ.\nUsing the Central Limit Theorem, I can standardize the estimator by subtracting the null value and dividing by its standard error:\n\\[\nz = \\frac{\\hat{\\theta} - 0}{SE(\\hat{\\theta})}\n\\]\nWhen the sample size is reasonably large, this standardized statistic is approximately normal. That allows me to compute a p-value and evaluate whether the observed treatment effect is unusually large relative to what would be expected under the null.\n\n\nz-statistic: 1.4858\np-value: 0.1373\n\n\nThe test statistic is not especially large relative to its standard error, so the corresponding p-value is not small. At the conventional 5% significance level, I would therefore fail to reject the null hypothesis that the two CTA versions have the same true sign-up rate.\nThis conclusion is consistent with the confidence interval computed earlier. Because the 95% confidence interval includes 0, the sample does not provide strong enough evidence to conclude that the true treatment effect is different from zero."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#the-t-test-as-a-regression",
+    "href": "projects/AB-testing/index.html#the-t-test-as-a-regression",
+    "title": "A/B Testing a Call to Action",
+    "section": "The T-Test as a Regression",
+    "text": "The T-Test as a Regression\nA simple A/B test can also be written as a regression model. To do this, I stack the two groups together into one dataset and define an indicator variable \\(D_i\\) that equals 1 if a visitor saw version A and 0 if a visitor saw version B. I then estimate the regression\n\\[\nY_i = \\beta_0 + \\beta_1 D_i + \\varepsilon_i\n\\]\nwhere \\(Y_i\\) is the binary sign-up outcome. In this setup, \\(\\beta_0\\) represents the mean outcome for group B, and \\(\\beta_1\\) represents the difference in mean outcomes between group A and group B.\nThat means the regression coefficient \\(\\beta_1\\) is exactly the treatment effect of interest:\n\\[\n\\beta_1 = \\pi_A - \\pi_B = \\theta\n\\]\nand its sample estimate \\(\\hat{\\beta}_1\\) is the same as the difference in sample means \\(\\hat{\\theta}\\).\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                      Y   R-squared:                       0.001\nModel:                            OLS   Adj. R-squared:                  0.001\nMethod:                 Least Squares   F-statistic:                     2.205\nDate:                Wed, 15 Apr 2026   Prob (F-statistic):              0.138\nTime:                        22:35:51   Log-Likelihood:                -961.28\nNo. Observations:                2000   AIC:                             1927.\nDf Residuals:                    1998   BIC:                             1938.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst          0.1760      0.012     14.217      0.000       0.152       0.200\nD              0.0260      0.018      1.485      0.138      -0.008       0.060\n==============================================================================\nOmnibus:                      467.203   Durbin-Watson:                   1.979\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              861.348\nSkew:                           1.586   Prob(JB):                    9.13e-188\nKurtosis:                       3.523   Cond. No.                         2.62\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\n\nIn my results, the regression intercept is 0.176, which matches the sample mean for group B, and the coefficient on the treatment indicator is 0.026, which matches the estimated treatment effect from the earlier A/B comparison. This confirms that the regression approach reproduces the same substantive conclusion."
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#the-problem-with-peeking",
+    "href": "projects/AB-testing/index.html#the-problem-with-peeking",
+    "title": "A/B Testing a Call to Action",
+    "section": "The Problem with Peeking",
+    "text": "The Problem with Peeking\nA common practical temptation in A/B testing is to “peek” at the data before the experiment is finished. For example, a manager may want to check the results every time another 100 visitors arrive and stop the test as soon as the p-value falls below 0.05.\nThe problem is that classical hypothesis testing assumes a fixed testing procedure. If I repeatedly test the same experiment while data accumulate and stop whenever I see significance, I create many chances to make a false positive decision. As a result, the actual Type I error rate can become much larger than the nominal 5% level.\n\nn_experiments = 10000\ncheckpoints = np.arange(100, 1001, 100)\nfalse_positive_count = 0\n\nfor _ in range(n_experiments):\n    A_null = np.random.binomial(1, 0.20, 1000)\n    B_null = np.random.binomial(1, 0.20, 1000)\n\n    rejected = False\n\n    for n in checkpoints:\n        hat_pi_A_null = A_null[:n].mean()\n        hat_pi_B_null = B_null[:n].mean()\n        hat_theta_null = hat_pi_A_null - hat_pi_B_null\n\n        se_null = np.sqrt(\n            hat_pi_A_null * (1 - hat_pi_A_null) / n +\n            hat_pi_B_null * (1 - hat_pi_B_null) / n\n        )\n\n        if se_null &gt; 0:\n            z_null = hat_theta_null / se_null\n            p_null = 2 * (1 - norm.cdf(abs(z_null)))\n\n            if p_null &lt; 0.05:\n                rejected = True\n                break\n\n    if rejected:\n        false_positive_count += 1\n\nfalse_positive_rate = false_positive_count / n_experiments\nprint(f\"False positive rate with peeking: {false_positive_rate:.4f}\")\n\nFalse positive rate with peeking: 0.2068\n\n\nUnder the null hypothesis, the two CTA versions truly have the same sign-up rate, so any statistically significant result is a false positive. If I were to follow the classical fixed-sample testing framework correctly, the Type I error rate should be around 5%.\nHowever, when I repeatedly peek at the results and stop as soon as significance appears, the false positive rate becomes noticeably larger than 5%. This happens because repeated testing gives randomness more opportunities to generate an apparently significant result.\nThis simulation shows why peeking is a serious practical problem in experimentation. If analysts or managers monitor p-values continuously without using an appropriate sequential testing correction, they may convince themselves that a nonexistent treatment effect is real."
+  },
+  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "My First Project\n\n\n\n\n\n\nYi(Ryan) Zhao\n\n\nApr 14, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "A/B Testing a Call to Action\n\n\n\n\n\n\nYi Zhao\n\n\nApr 15, 2026\n\n\n\n\n\n\n\n\n\n\n\nMy First Project\n\n\n\n\n\n\nYi(Ryan) Zhao\n\n\nApr 15, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/AB-testing/index.html#conclusion",
+    "href": "projects/AB-testing/index.html#conclusion",
+    "title": "A/B Testing a Call to Action",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis A/B testing example illustrates several central ideas in classical frequentist statistics. First, the Law of Large Numbers shows why estimators become more stable as the sample size increases. Second, the bootstrap and analytical standard errors quantify the uncertainty around the estimated treatment effect. Third, the Central Limit Theorem explains why approximate normal inference becomes reasonable in larger samples.\nIn this simulated dataset, version A produced a higher estimated sign-up rate than version B, but the confidence interval included 0 and the p-value was greater than 0.05. Therefore, I do not have strong enough evidence to conclude that the two CTA versions differ in the population. Finally, the peeking simulation shows that repeatedly checking results can substantially inflate the false positive rate, which is an important practical warning for real-world experimentation."
   }
 ]

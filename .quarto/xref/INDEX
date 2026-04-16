@@ -1,17 +1,20 @@
 {
   "about.qmd": {
-    "about.html": "fa1e4949"
+    "about.html": "a1777264"
   },
   "index.qmd": {
-    "index.html": "7f9a4a29"
+    "index.html": "54c7c2c6"
   },
-  "projects.qmd": {
-    "projects.html": "1a82c0e7"
-  },
-  "resume.qmd": {
-    "resume.html": "fb0eba9a"
+  "projects/AB-testing/index.qmd": {
+    "index.html": "1b80cc73"
   },
   "projects/project1/index.qmd": {
-    "index.html": "a917d119"
+    "index.html": "df28e8f9"
+  },
+  "projects.qmd": {
+    "projects.html": "4e07fd00"
+  },
+  "resume.qmd": {
+    "resume.html": "6239ae75"
   }
 }
