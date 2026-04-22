@@ -1,0 +1,122 @@
+---
+title: "HW2: Replication of Karlan & List (2007)"
+subtitle: "Does Price Matter in Charitable Giving?"
+author: "Yi Zhao"
+date: today
+---
+
+
+## Introduction
+
+Karlan and List (2007) study whether price incentives affect charitable giving. In their field experiment, prior donors of a nonprofit organization received direct-mail solicitations, and some were randomly offered a matching grant. The central question is whether this matching offer increases the probability of giving and the amount donated.
+
+This is a causal question rather than a purely descriptive one. The authors are not simply asking whether people who face different fundraising messages donate different amounts. Instead, they want to know whether the matching grant itself causes higher giving.
+
+The paper is especially compelling because it uses randomized assignment. Since treatment is randomly assigned, the treatment and control groups should be similar on average before the solicitation is sent. This design greatly reduces selection bias and allows differences in outcomes to be interpreted as causal effects.
+
+## Main Analysis
+
+In this section, I replicate two core parts of the paper. First, I examine baseline balance between the treatment and control groups. Second, I replicate the paper’s main treatment effect on the probability of donating.
+
+```{python}
+#| label: load-data
+#| echo: false
+
+import pandas as pd
+
+df = pd.read_stata("../../files/hw2-karlan-list/AERtables1-5.dta")
+
+print(df.shape)
+df.head()
+```
+
+```{python}
+#| label: check-treatment
+#| echo: false
+
+print(df["treatment"].value_counts(dropna=False))
+print(df["control"].value_counts(dropna=False))
+```
+
+```{python}
+#| label: table1-balance
+#| echo: false
+
+balance_vars = ["HPA", "freq", "years", "female", "couple", "cases", "nonlit"]
+
+table1 = pd.DataFrame({
+    "All": df[balance_vars].mean(),
+    "Treatment": df.loc[df["treatment"] == 1, balance_vars].mean(),
+    "Control": df.loc[df["control"] == 1, balance_vars].mean()
+})
+
+table1["Difference"] = table1["Treatment"] - table1["Control"]
+table1 = table1.round(3)
+
+table1
+```
+
+The treatment and control groups appear very similar on observable pre-treatment characteristics. The differences are small across prior giving behavior, demographic variables, and organization activity measures. This pattern is consistent with successful random assignment and supports the claim that the treatment and control groups are balanced at baseline.
+
+```{python}
+#| label: gave-by-group
+#| echo: false
+
+gave_summary = df.groupby("treatment")["gave"].mean().reset_index()
+gave_summary
+```
+
+```{python}
+#| label: table3-col1
+#| echo: false
+
+import statsmodels.api as sm
+
+reg_df = df[["gave", "treatment"]].dropna()
+
+X = sm.add_constant(reg_df["treatment"])
+model1 = sm.OLS(reg_df["gave"], X).fit()
+
+coef_table = pd.DataFrame({
+    "Coefficient": model1.params,
+    "Std. Error": model1.bse,
+    "P-value": model1.pvalues
+}).round(4)
+
+coef_table
+```
+
+The estimated coefficient on the treatment indicator is the effect of receiving a matching grant offer on the probability of donating. My difference-in-means result shows that the donation rate is about 1.79% in the control group and 2.20% in the treatment group, a difference of approximately 0.42 percentage points. This is very close to the main treatment effect reported in the paper.
+
+## Something Additional
+
+```{python}
+#| label: donation-rate-plot
+#| echo: false
+
+import matplotlib.pyplot as plt
+
+plot_df = gave_summary.copy()
+plot_df["group"] = plot_df["treatment"].map({0.0: "Control", 1.0: "Treatment"})
+
+plt.figure(figsize=(8, 5))
+plt.bar(plot_df["group"], plot_df["gave"])
+plt.ylabel("Donation Rate")
+plt.title("Donation Rate by Experimental Group")
+plt.ylim(0, 0.025)
+
+for i, v in enumerate(plot_df["gave"]):
+    plt.text(i, v + 0.0005, f"{v:.3f}", ha="center")
+
+plt.tight_layout()
+plt.show()
+```
+
+The figure presents the average donation rate in the control and treatment groups. The treatment group has a visibly higher response rate than the control group, which is consistent with the regression result. This provides a simple graphical illustration of the paper’s main finding: offering a matching grant increases the probability of donating.
+This visualization is useful because the original paper emphasizes regression tables, while the graph makes the size of the treatment effect easier to interpret. Even though the effect is small in absolute terms, it is meaningful relative to the low baseline donation rate in the control group.
+
+## Conclusion
+
+In this replication, I examined the main result from Karlan and List (2007) on charitable giving. First, I showed that the treatment and control groups are well balanced on several observable baseline characteristics, which is consistent with successful random assignment. Second, I replicated the paper’s main treatment effect: offering a matching grant increases the probability that a donor gives. My estimated treatment effect of about 0.0042 is very close to the published result.
+
+As an additional analysis, I graphed the donation rate by experimental group. The figure makes the paper’s main finding especially clear: even a modest increase in donation probability is visible when comparing treatment and control directly. Overall, this replication supports the paper’s conclusion that matching incentives can meaningfully increase charitable giving.

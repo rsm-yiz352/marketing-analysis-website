@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Yi(Ryan) Zhao">
+<meta name="author" content="Yi Zhao">
 <meta name="dcterms.date" content="2026-04-22">
 
-<title>My First Project – Yi(Ryan) Zhao</title>
+<title>HW2: Replication of Karlan &amp; List (2007) – Yi(Ryan) Zhao</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,7 +28,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -72,6 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -117,15 +120,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#main-analysis" id="toc-main-analysis" class="nav-link" data-scroll-target="#main-analysis">Main Analysis</a></li>
+  <li><a href="#something-additional" id="toc-something-additional" class="nav-link" data-scroll-target="#something-additional">Something Additional</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">My First Project</h1>
+<h1 class="title">HW2: Replication of Karlan &amp; List (2007)</h1>
+<p class="subtitle lead">Does Price Matter in Charitable Giving?</p>
 </div>
 
 
@@ -135,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Yi(Ryan) Zhao </p>
+             <p>Yi Zhao </p>
           </div>
   </div>
     
@@ -154,10 +167,349 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is my first project page.</p>
-<p>I will use this space to share my marketing analytics assignments, project summaries, and business insights.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Karlan and List (2007) study whether price incentives affect charitable giving. In their field experiment, prior donors of a nonprofit organization received direct-mail solicitations, and some were randomly offered a matching grant. The central question is whether this matching offer increases the probability of giving and the amount donated.</p>
+<p>This is a causal question rather than a purely descriptive one. The authors are not simply asking whether people who face different fundraising messages donate different amounts. Instead, they want to know whether the matching grant itself causes higher giving.</p>
+<p>The paper is especially compelling because it uses randomized assignment. Since treatment is randomly assigned, the treatment and control groups should be similar on average before the solicitation is sent. This design greatly reduces selection bias and allows differences in outcomes to be interpreted as causal effects.</p>
+</section>
+<section id="main-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="main-analysis">Main Analysis</h2>
+<p>In this section, I replicate two core parts of the paper. First, I examine baseline balance between the treatment and control groups. Second, I replicate the paper’s main treatment effect on the probability of donating.</p>
+<div id="cell-load-data" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>(50130, 35)</code></pre>
+</div>
+<div id="load-data" class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">amount</th>
+<th data-quarto-table-cell-role="th">freq</th>
+<th data-quarto-table-cell-role="th">HPA</th>
+<th data-quarto-table-cell-role="th">ask1</th>
+<th data-quarto-table-cell-role="th">ask2</th>
+<th data-quarto-table-cell-role="th">ask3</th>
+<th data-quarto-table-cell-role="th">control</th>
+<th data-quarto-table-cell-role="th">treatment</th>
+<th data-quarto-table-cell-role="th">ask</th>
+<th data-quarto-table-cell-role="th">ratio</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">size25</th>
+<th data-quarto-table-cell-role="th">size50</th>
+<th data-quarto-table-cell-role="th">size100</th>
+<th data-quarto-table-cell-role="th">MRM2</th>
+<th data-quarto-table-cell-role="th">dormant</th>
+<th data-quarto-table-cell-role="th">ltmedMRA</th>
+<th data-quarto-table-cell-role="th">red0</th>
+<th data-quarto-table-cell-role="th">blue0</th>
+<th data-quarto-table-cell-role="th">close25</th>
+<th data-quarto-table-cell-role="th">amountchange</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.0</td>
+<td>32.0</td>
+<td>500.0</td>
+<td>750.0</td>
+<td>950.0</td>
+<td>1125.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>...</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>19.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>-150.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>0.0</td>
+<td>22.0</td>
+<td>300.0</td>
+<td>500.0</td>
+<td>625.0</td>
+<td>750.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>29.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>-100.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>0.0</td>
+<td>22.0</td>
+<td>500.0</td>
+<td>750.0</td>
+<td>950.0</td>
+<td>1125.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>-218.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>0.0</td>
+<td>29.0</td>
+<td>250.0</td>
+<td>500.0</td>
+<td>625.0</td>
+<td>750.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>4.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>-50.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>0.0</td>
+<td>17.0</td>
+<td>50.0</td>
+<td>55.0</td>
+<td>70.0</td>
+<td>85.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>3.0</td>
+<td>2.0</td>
+<td>...</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>8.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>-50.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 35 columns</p>
+</div>
+</div>
+</div>
+<div id="check-treatment" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>treatment
+1.0    33396
+0.0    16687
+NaN       47
+Name: count, dtype: int64
+control
+0.0    33396
+1.0    16687
+NaN       47
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-table1-balance" class="cell" data-execution_count="3">
+<div id="table1-balance" class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">All</th>
+<th data-quarto-table-cell-role="th">Treatment</th>
+<th data-quarto-table-cell-role="th">Control</th>
+<th data-quarto-table-cell-role="th">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">HPA</th>
+<td>59.385</td>
+<td>59.597</td>
+<td>58.960</td>
+<td>0.637</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">freq</th>
+<td>8.039</td>
+<td>8.035</td>
+<td>8.047</td>
+<td>-0.012</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">years</th>
+<td>6.098</td>
+<td>6.078</td>
+<td>6.136</td>
+<td>-0.058</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">female</th>
+<td>0.278</td>
+<td>0.275</td>
+<td>0.283</td>
+<td>-0.008</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">couple</th>
+<td>0.092</td>
+<td>0.091</td>
+<td>0.093</td>
+<td>-0.002</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">cases</th>
+<td>1.500</td>
+<td>1.499</td>
+<td>1.502</td>
+<td>-0.004</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">nonlit</th>
+<td>2.474</td>
+<td>2.485</td>
+<td>2.453</td>
+<td>0.032</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The treatment and control groups appear very similar on observable pre-treatment characteristics. The differences are small across prior giving behavior, demographic variables, and organization activity measures. This pattern is consistent with successful random assignment and supports the claim that the treatment and control groups are balanced at baseline.</p>
+<div id="cell-gave-by-group" class="cell" data-execution_count="4">
+<div id="gave-by-group" class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">treatment</th>
+<th data-quarto-table-cell-role="th">gave</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0.0</td>
+<td>0.017858</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1.0</td>
+<td>0.022039</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-table3-col1" class="cell" data-execution_count="5">
+<div id="table3-col1" class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Coefficient</th>
+<th data-quarto-table-cell-role="th">Std. Error</th>
+<th data-quarto-table-cell-role="th">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">const</th>
+<td>0.0179</td>
+<td>0.0011</td>
+<td>0.0000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">treatment</th>
+<td>0.0042</td>
+<td>0.0013</td>
+<td>0.0019</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The estimated coefficient on the treatment indicator is the effect of receiving a matching grant offer on the probability of donating. My difference-in-means result shows that the donation rate is about 1.79% in the control group and 2.20% in the treatment group, a difference of approximately 0.42 percentage points. This is very close to the main treatment effect reported in the paper.</p>
+</section>
+<section id="something-additional" class="level2">
+<h2 class="anchored" data-anchor-id="something-additional">Something Additional</h2>
+<div id="cell-donation-rate-plot" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/donation-rate-plot-output-1.png" id="donation-rate-plot" width="758" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure presents the average donation rate in the control and treatment groups. The treatment group has a visibly higher response rate than the control group, which is consistent with the regression result. This provides a simple graphical illustration of the paper’s main finding: offering a matching grant increases the probability of donating. This visualization is useful because the original paper emphasizes regression tables, while the graph makes the size of the treatment effect easier to interpret. Even though the effect is small in absolute terms, it is meaningful relative to the low baseline donation rate in the control group.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this replication, I examined the main result from Karlan and List (2007) on charitable giving. First, I showed that the treatment and control groups are well balanced on several observable baseline characteristics, which is consistent with successful random assignment. Second, I replicated the paper’s main treatment effect: offering a matching grant increases the probability that a donor gives. My estimated treatment effect of about 0.0042 is very close to the published result.</p>
+<p>As an additional analysis, I graphed the donation rate by experimental group. The figure makes the paper’s main finding especially clear: even a modest increase in donation probability is visible when comparing treatment and control directly. Overall, this replication supports the paper’s conclusion that matching incentives can meaningfully increase charitable giving.</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
