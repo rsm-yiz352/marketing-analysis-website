@@ -8,6 +8,7 @@ date: "2026/04/15"
 
 ## Introduction
 
+
 In this post, I study an A/B test for a website call to action (CTA). The business goal is to determine which wording leads to a higher newsletter sign-up rate. Although this is a practical marketing problem, it is also a useful setting for learning key ideas from classical frequentist statistics.
 
 The basic idea of the experiment is simple. Website visitors are randomly assigned to one of two CTA versions, A or B, and we observe whether each visitor signs up for the newsletter. By comparing the observed sign-up rates across the two groups, we can estimate the effect of CTA wording on conversion.
