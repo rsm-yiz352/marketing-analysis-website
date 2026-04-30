@@ -7,7 +7,7 @@ date: "2026/04/15"
 
 
 ## Introduction
-
+hi
 
 In this post, I study an A/B test for a website call to action (CTA). The business goal is to determine which wording leads to a higher newsletter sign-up rate. Although this is a practical marketing problem, it is also a useful setting for learning key ideas from classical frequentist statistics.
 
