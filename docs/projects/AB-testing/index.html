@@ -239,6 +239,7 @@ window.Quarto = {
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>hi</p>
 <p>In this post, I study an A/B test for a website call to action (CTA). The business goal is to determine which wording leads to a higher newsletter sign-up rate. Although this is a practical marketing problem, it is also a useful setting for learning key ideas from classical frequentist statistics.</p>
 <p>The basic idea of the experiment is simple. Website visitors are randomly assigned to one of two CTA versions, A or B, and we observe whether each visitor signs up for the newsletter. By comparing the observed sign-up rates across the two groups, we can estimate the effect of CTA wording on conversion.</p>
 <p>This example also connects directly to the frequentist view of probability from class. In that framework, probability is understood as a long-run relative frequency over repeated trials. Here, the sign-up rate for each CTA can be interpreted as the long-run proportion of visitors who would sign up if we repeatedly showed that version to many similar users.</p>
@@ -324,7 +325,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="6d462861" class="cell" data-execution_count="2">
+<div id="e94a7e7d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estimated treatment effect (hat_theta): </span><span class="sc">{</span>hat_theta<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estimated treatment effect (hat_theta): 0.0260</code></pre>
@@ -461,8 +462,8 @@ Y_i = \beta_0 + \beta_1 D_i + \varepsilon_i
 Dep. Variable:                      Y   R-squared:                       0.001
 Model:                            OLS   Adj. R-squared:                  0.001
 Method:                 Least Squares   F-statistic:                     2.205
-Date:                Wed, 22 Apr 2026   Prob (F-statistic):              0.138
-Time:                        01:51:00   Log-Likelihood:                -961.28
+Date:                Sun, 17 May 2026   Prob (F-statistic):              0.138
+Time:                        02:56:13   Log-Likelihood:                -961.28
 No. Observations:                2000   AIC:                             1927.
 Df Residuals:                    1998   BIC:                             1938.
 Df Model:                           1                                         

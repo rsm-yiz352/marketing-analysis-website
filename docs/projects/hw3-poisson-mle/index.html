@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Yi Zhao">
+<meta name="dcterms.date" content="2026-05-16">
 
-<title>Projects – Yi(Ryan) Zhao</title>
+<title>Poisson Regression and Maximum Likelihood Estimation – Yi(Ryan) Zhao</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,25 +28,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,35 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -132,7 +106,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -142,7 +116,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Yi(Ryan) Zhao</span>
     </a>
   </div>
@@ -153,15 +127,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resume.html"> 
+    <a class="nav-link" href="../../resume.html"> 
 <span class="menu-text">Resume</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -175,22 +149,45 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a></li>
+  <li><a href="#a-simple-poisson-model-via-maximum-likelihood" id="toc-a-simple-poisson-model-via-maximum-likelihood" class="nav-link" data-scroll-target="#a-simple-poisson-model-via-maximum-likelihood">A Simple Poisson Model via Maximum Likelihood</a></li>
+  <li><a href="#poisson-regression" id="toc-poisson-regression" class="nav-link" data-scroll-target="#poisson-regression">Poisson Regression</a></li>
+  <li><a href="#the-effect-of-blueprintys-software" id="toc-the-effect-of-blueprintys-software" class="nav-link" data-scroll-target="#the-effect-of-blueprintys-software">The Effect of Blueprinty’s Software</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Projects</h1>
+<h1 class="title">Poisson Regression and Maximum Likelihood Estimation</h1>
+<p class="subtitle lead">A Case Study of Blueprinty’s Software and Patent Awards</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yi Zhao </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 16, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -200,103 +197,182 @@ window.Quarto = {
 </header>
 
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Blueprinty sells software designed to help engineering firms prepare blueprints for patent applications. The company’s marketing team would like to argue that firms using Blueprinty’s software are more successful in getting patents approved.</p>
+<p>This is not a trivial claim to evaluate. The data are observational rather than experimental: firms are not randomly assigned to become Blueprinty customers. As a result, any raw difference in patent counts between customers and non-customers could reflect other characteristics of the firms, such as age or regional location, rather than the effect of the software itself.</p>
+<p>In this post, I first explore the data, then derive a simple Poisson model via maximum likelihood estimation, and finally extend the analysis to a Poisson regression that adjusts for firm characteristics.</p>
+</section>
+<section id="exploring-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
+<p>The dataset contains 1,500 firms and includes four variables: patent counts, region, firm age, and customer status.</p>
+<div id="ee6896d3" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-1.png" width="1142" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="733c3519" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-8-output-1.png" width="950" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="69c88b88" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-1.png" width="1142" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The exploratory analysis reveals three important patterns. First, customer firms have higher raw patent counts than non-customer firms on average: customer firms average about 4.13 patents, compared with about 3.47 for non-customer firms. Second, patent counts are non-negative integers and right-skewed, which makes a Poisson model a natural starting point. Third, Blueprinty customers do not appear to be randomly distributed across observable firm characteristics. In particular, customer firms are heavily concentrated in the Northeast and are slightly older on average than non-customers.</p>
+<p>These differences matter because they suggest that a raw comparison of patent counts may overstate or misstate the effect of Blueprinty’s software. Some of the observed difference could instead reflect differences in regional composition or firm age.</p>
+</section>
+<section id="a-simple-poisson-model-via-maximum-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-poisson-model-via-maximum-likelihood">A Simple Poisson Model via Maximum Likelihood</h2>
+<p>The dependent variable in this dataset is a count: the number of patents awarded to a firm over the last five years. Because this outcome is non-negative, integer-valued, and right-skewed, a Poisson model is a natural starting point. In the simplest version of the model, I assume that each firm’s patent count is drawn independently from a Poisson distribution with common rate parameter (). <span class="math display">\[
+Y_i \sim \text{Poisson}(\lambda)
+\]</span></p>
+<p>Under this model, the probability of observing patent count (y_i) is:</p>
+<p><span class="math display">\[
+P(Y_i = y_i \mid \lambda) = \frac{e^{-\lambda}\lambda^{y_i}}{y_i!}
+\]</span></p>
+<p>Assuming the observations are independent, the likelihood for the full sample is:</p>
+<p><span class="math display">\[
+L(\lambda) = \prod_{i=1}^n \frac{e^{-\lambda}\lambda^{y_i}}{y_i!}
+\]</span></p>
+<p>Taking logs gives the sample log-likelihood:</p>
+<p><span class="math display">\[
+\ell(\lambda) = \log L(\lambda)
+= \sum_{i=1}^n \left(-\lambda + y_i \log \lambda - \log(y_i!)\right)
+\]</span></p>
+<p>I maximize the log-likelihood rather than the likelihood itself because the logarithm turns products into sums, which makes the objective function easier to work with numerically.</p>
+<div id="cell-plot-simple-loglike" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div id="plot-simple-loglike" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/plot-simple-loglike-output-1.png" width="758" height="470" class="figure-img"></p>
+<figcaption>Poisson log-likelihood over candidate values of lambda</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The log-likelihood is single-peaked and reaches its maximum at approximately (= 3.685). The numerical optimization result is essentially identical to the sample mean of the patent counts. This matches the standard Poisson result that the maximum likelihood estimator of () is the sample mean. In substantive terms, the simple Poisson model estimates that the average firm in this dataset receives about 3.68 patents over the five-year period.</p>
+<p>This simple model is useful as a baseline, but it is also restrictive because it assumes that all firms share the same expected patent rate. In reality, firms differ in age, region, and customer status, so the next step is to allow the Poisson rate parameter to vary across firms.</p>
+</section>
+<section id="poisson-regression" class="level2">
+<h2 class="anchored" data-anchor-id="poisson-regression">Poisson Regression</h2>
+<p>The simple Poisson model assumes that every firm shares the same expected patent rate. That is restrictive, since firms differ in age, location, and customer status. To allow the expected patent count to vary across firms, I extend the model to a Poisson regression.</p>
+<p><span class="math display">\[
+Y_i \sim \text{Poisson}(\lambda_i)
+\]</span></p>
+<p><span class="math display">\[
+\lambda_i = \exp(x_i' \beta)
+\]</span></p>
+<p>Here, (x_i) contains observable firm characteristics, including age, region, and customer status. The exponential link ensures that the predicted rate parameter (_i) is always positive.</p>
+<p>Table 1 compares the manually optimized Poisson regression coefficients with the estimates from the built-in GLM implementation. The two sets of estimates are nearly identical.</p>
+<div id="cell-compare-coefs" class="cell" data-execution_count="17">
+<div id="compare-coefs" class="cell-output cell-output-display" data-execution_count="17">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">variable</th>
+<th data-quarto-table-cell-role="th">custom_mle</th>
+<th data-quarto-table-cell-role="th">glm_coef</th>
+<th data-quarto-table-cell-role="th">glm_se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>const</td>
+<td>-0.509992</td>
+<td>-0.508920</td>
+<td>0.183179</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>age</td>
+<td>0.148706</td>
+<td>0.148619</td>
+<td>0.013869</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>age_sq</td>
+<td>-0.002972</td>
+<td>-0.002970</td>
+<td>0.000258</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>region_Northeast</td>
+<td>0.029155</td>
+<td>0.029170</td>
+<td>0.043625</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>region_Northwest</td>
+<td>-0.017578</td>
+<td>-0.017575</td>
+<td>0.053781</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>region_South</td>
+<td>0.056565</td>
+<td>0.056561</td>
+<td>0.052662</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>region_Southwest</td>
+<td>0.050567</td>
+<td>0.050576</td>
+<td>0.047198</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>iscustomer</td>
+<td>0.207609</td>
+<td>0.207591</td>
+<td>0.030895</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The manually optimized Poisson regression coefficients are nearly identical to the estimates produced by <code>statsmodels</code>’ built-in GLM routine. Although the numerical optimizer returned a warning about precision loss, the parameter estimates match the GLM results extremely closely, which suggests that the manually coded log-likelihood is correct.</p>
+<p>The coefficient on <code>iscustomer</code> is positive (about 0.208) and statistically significant. Because the Poisson model uses a log link, this coefficient is interpreted multiplicatively rather than additively. Exponentiating the estimate gives (e^{0.208} ), which suggests that, holding age and region fixed, customer firms have an expected patent rate about 23% higher than otherwise similar non-customer firms.</p>
+<p>The age terms suggest a nonlinear relationship between firm age and patent output: the positive coefficient on age and negative coefficient on age squared imply that patent counts tend to rise with age at first, but at a decreasing rate.</p>
+<p>The regional controls vary in sign and magnitude, but most are not statistically distinguishable from the omitted baseline region in this specification.</p>
+</section>
+<section id="the-effect-of-blueprintys-software" class="level2">
+<h2 class="anchored" data-anchor-id="the-effect-of-blueprintys-software">The Effect of Blueprinty’s Software</h2>
+<p>The coefficients from a Poisson regression are not directly interpretable as “additional patents,” because the model is expressed on the log-rate scale rather than as an additive change in patent counts. To obtain a more interpretable quantity, I constructed two counterfactual datasets: one in which every firm is treated as a non-customer and one in which every firm is treated as a customer, while holding age and region fixed.</p>
+<p>Using the fitted model, the average predicted patent count is about 3.44 if all firms are treated as non-customers and about 4.23 if all firms are treated as customers. The difference is approximately 0.79 patents over the five-year period.</p>
+<p>This result is consistent with Blueprinty’s marketing claim, but it should not be interpreted as definitive causal evidence. Since the data are observational rather than randomized, unobserved firm characteristics may still influence both software adoption and patent outcomes.</p>
+<p>Overall, the results suggest that Blueprinty’s software is associated with stronger patent outcomes after adjusting for observable firm characteristics, though stronger causal claims would require a more rigorous research design.</p>
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1776236400000" data-listing-file-modified-sort="1779011767275" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2447">
-<a href="./projects/AB-testing/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img loading='lazy' src="projects\AB-testing\index_files\figure-html\lln-plot-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-A/B Testing a Call to Action
-</h5>
-<div class="card-text listing-description delink">
-hi
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Yi Zhao
-</div>
-<div class="listing-date">
-Apr 15, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1779001200000" data-listing-file-modified-sort="1776847823046" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="629">
-<a href="./projects/hw2-karlan-list/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img loading='lazy' src="projects\hw2-karlan-list\index_files\figure-html\donation-rate-plot-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-HW2: Replication of Karlan &amp; List (2007)
-</h5>
-<div class="card-text listing-description delink">
-Karlan and List (2007) study whether price incentives affect charitable giving. In their field experiment, prior donors of a nonprofit organization received direct-mail…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Yi Zhao
-</div>
-<div class="listing-date">
-May 17, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1779001200000" data-listing-file-modified-sort="1776226139237" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="21">
-<a href="./projects/project1/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-My First Project
-</h5>
-<div class="card-text listing-description delink">
-This is my first project page.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Yi(Ryan) Zhao
-</div>
-<div class="listing-date">
-May 17, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="3" data-listing-date-sort="1778914800000" data-listing-file-modified-sort="1779010973163" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1369">
-<a href="./projects/hw3-poisson-mle/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img loading='lazy' src="projects\hw3-poisson-mle\index_files\figure-html\cell-6-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Poisson Regression and Maximum Likelihood Estimation
-</h5>
-<div class="card-text listing-description delink">
-Blueprinty sells software designed to help engineering firms prepare blueprints for patent applications. The company’s marketing team would like to argue that firms using…
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Yi Zhao
-</div>
-<div class="listing-date">
-May 16, 2026
-</div>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
